@@ -1,0 +1,222 @@
+{
+  "users": [
+    {
+      "id": "u_1756304065833460",
+      "firstName": "Amin",
+      "lastName": "Test",
+      "email": "amin@example.com",
+      "password": "$2b$10$E3iM.wJCXRrHnWicsRel7uBI0l92Hh4TBlicsSigUI9yqBcpOwQq6"
+    },
+    {
+      "id": "u_1756310017542579",
+      "firstName": "am",
+      "lastName": "am",
+      "email": "am@gmail.com",
+      "password": "$2b$10$y53d6IDMX2HkxULKoKfXsOMZzl6Bc/c2oFhuQ7rZfwyzeiMlBwm1O"
+    },
+    {
+      "id": "u_1756311023471638",
+      "firstName": "ja",
+      "lastName": "ja",
+      "email": "ja@gmail.com",
+      "password": "$2b$10$yxYwQaEBbrhXb8Di12gb6eGG6mSTKaAfwc/xwTS5AOJVOFgmuVjTC"
+    },
+    {
+      "id": "u_1756311922051395",
+      "firstName": "ni",
+      "lastName": "ni",
+      "email": "ni@gmail.com",
+      "password": "$2b$10$UoJrAx7IEa8YhsWUYHdJ9uoGyanvtO4IuazYOaot5ank7cyztLMbG"
+    },
+    {
+      "id": "u_1756314318669302",
+      "firstName": "aa",
+      "lastName": "aa",
+      "email": "aa@aa.com",
+      "password": "$2b$10$Jo7TvCLdv7geNPnJIp.SGOaB6B7E7oLthjsLh99WNw7W.Tx9VFJWu"
+    },
+    {
+      "id": "u_1756315530739728",
+      "firstName": "Demo",
+      "lastName": "User",
+      "email": "demo@example.com",
+      "password": "$2b$10$yR8CCGS6m/8/uNR46dy3ke91skPWpd/3DNypANrZ3sxckaJsG81.u"
+    },
+    {
+      "id": "u_1756316761978558",
+      "firstName": "tt",
+      "lastName": "tt",
+      "email": "tt@gmail.com",
+      "password": "$2b$10$RjgumNn3Zm0/ROccltmKNOvUfyMRP6sUMBMcBBbCD8yxwgcWPNcba"
+    },
+    {
+      "id": "u_1756317100885658",
+      "firstName": "rr",
+      "lastName": "rr",
+      "email": "rr@gmail.com",
+      "password": "$2b$10$1zPOFU9Xd3qYJ779fLInwuxkqjDNxkX.Kp9HWjuq5.wKlIyTgcriC"
+    },
+    {
+      "id": "u_1756337340890626",
+      "firstName": "wer",
+      "lastName": "wer",
+      "email": "wer@gmail.com",
+      "password": "$2b$10$BAQuts4A5hZoSb5K8oflzOYGvIQ.Pn5sWk0Ht2JIZbML94BMNRvem"
+    }
+  ],
+  "unterkuenfte": [
+    {
+      "id": "u_1756304359898112",
+      "kapazitaet": 4,
+      "adresse": "Musterstra�e 1",
+      "name": "Wohnung A"
+    },
+    {
+      "id": "u_1756304359903671",
+      "kapazitaet": 2,
+      "adresse": "Beispielweg 2",
+      "name": "Wohnung B"
+    }
+  ],
+  "reservierungen": [
+    {
+      "id": "r_1756304375493973",
+      "von": "2025-09-01",
+      "mieterName": "Max Mustermann",
+      "preis": 500,
+      "bis": "2025-09-10",
+      "unterkunftId": "u_1"
+    },
+    {
+      "id": "r_1756305767775588",
+      "von": "2025-09-15",
+      "mieterName": "Max Mustermann",
+      "preis": 350,
+      "bis": "2025-09-20",
+      "unterkunftId": "u_1756304359898112"
+    },
+    {
+      "id": "r_1756310061412576",
+      "vorname": "aa",
+      "nachname": "aa",
+      "ausweisnummer": "aa",
+      "telefon": "22",
+      "startdatum": "2025-08-10",
+      "enddatum": "2025-08-14",
+      "dauer": "4 Tage",
+      "preis": 5000,
+      "unterkunft": "s",
+      "standort": "s",
+      "fotoAusweis": "Kein Foto",
+      "fotoPass": "Kein Foto"
+    },
+    {
+      "id": "r_1756310483807328",
+      "nachname": "Backend",
+      "preis": 777,
+      "vorname": "UI-Test",
+      "unterkunft": "Wohnung A",
+      "startdatum": "2025-08-10",
+      "fotoPass": "Kein Foto",
+      "fotoAusweis": "Kein Foto",
+      "enddatum": "2025-08-14",
+      "standort": "Frankfurt",
+      "dauer": "4 Tage"
+    },
+    {
+      "id": "r_1756311086663781",
+      "vorname": "a",
+      "nachname": "a",
+      "ausweisnummer": "aaa",
+      "telefon": "1234",
+      "startdatum": "2025-08-21",
+      "enddatum": "2025-08-23",
+      "dauer": "2 Tage",
+      "preis": 500,
+      "unterkunft": "a",
+      "standort": "a",
+      "fotoAusweis": "Kein Foto",
+      "fotoPass": "Kein Foto"
+    },
+    {
+      "id": "r_1756315917990846",
+      "userId": "u_1756315530739728",
+      "vorname": "a",
+      "nachname": "a",
+      "ausweisnummer": "233",
+      "telefon": "ss",
+      "startdatum": "2025-08-23",
+      "enddatum": "2025-09-06",
+      "dauer": "14 Tage",
+      "preis": 200,
+      "unterkunft": "a",
+      "standort": "a",
+      "fotoAusweis": "Kein Foto",
+      "fotoPass": "Kein Foto"
+    },
+    {
+      "id": "r_1756315957013506",
+      "userId": "u_1756311023471638",
+      "vorname": "aaaü",
+      "nachname": "aaaü",
+      "ausweisnummer": "aaaü",
+      "telefon": "aaaaü",
+      "startdatum": "2025-08-27",
+      "enddatum": "2025-08-28",
+      "dauer": "1 Tage",
+      "preis": 350,
+      "unterkunft": "aaaü",
+      "standort": "aaaü",
+      "fotoAusweis": "Kein Foto",
+      "fotoPass": "Kein Foto"
+    },
+    {
+      "id": "r_1756316804780627",
+      "userId": "u_1756316761978558",
+      "vorname": "aa",
+      "nachname": "aa",
+      "ausweisnummer": "aa",
+      "telefon": "aa",
+      "startdatum": "2025-08-29",
+      "enddatum": "2025-08-30",
+      "dauer": "1 Tage",
+      "preis": 963,
+      "unterkunft": "a",
+      "standort": "a",
+      "fotoAusweis": "Kein Foto",
+      "fotoPass": "Kein Foto"
+    },
+    {
+      "id": "r_1756317120620491",
+      "userId": "u_1756317100885658",
+      "vorname": "rr",
+      "nachname": "rr",
+      "ausweisnummer": "rr",
+      "telefon": "rr",
+      "startdatum": "2025-08-27",
+      "enddatum": "2025-08-30",
+      "dauer": "3 Tage",
+      "preis": 350,
+      "unterkunft": "rr",
+      "standort": "rr",
+      "fotoAusweis": "Kein Foto",
+      "fotoPass": "Kein Foto"
+    },
+    {
+      "id": "r_1756337384135697",
+      "userId": "u_1756337340890626",
+      "vorname": "amin",
+      "nachname": "amin",
+      "ausweisnummer": "aaaa",
+      "telefon": "02316",
+      "startdatum": "2025-08-28",
+      "enddatum": "2025-08-31",
+      "dauer": "3 Tage",
+      "preis": 690,
+      "unterkunft": "a",
+      "standort": "a",
+      "fotoAusweis": "Kein Foto",
+      "fotoPass": "Kein Foto"
+    }
+  ]
+}

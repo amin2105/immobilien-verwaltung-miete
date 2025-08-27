@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Anmelden – Reservierungsverwaltung</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --primary:#FF385C; --secondary:#008489;
+      --bg:#f6f7fb; --card:#ffffff; --text:#2a2a2a; --muted:#6b7280;
+      --radius:16px; --shadow:0 10px 30px rgba(0,0,0,.08);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; background:
+        radial-gradient(1200px 800px at -15% -25%, rgba(255,56,92,.08), transparent 60%),
+        radial-gradient(1000px 700px at 120% 20%, rgba(0,132,137,.08), transparent 60%),
+        var(--bg);
+      font-family: 'Montserrat', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      color:var(--text); display:grid; place-items:center; padding:24px;
+    }
+    .card{
+      width:min(560px, 92vw); background:var(--card); border-radius:var(--radius);
+      box-shadow:var(--shadow); overflow:hidden;
+    }
+    .card__head{
+      padding:28px 28px 20px; background:
+        linear-gradient(135deg, rgba(255,56,92,.12), rgba(0,132,137,.12));
+      border-bottom:1px solid rgba(0,0,0,.04);
+    }
+    .title{
+      font-family:'Playfair Display', serif; margin:0; font-size:clamp(28px,4vw,36px); line-height:1.1;
+    }
+    .subtitle{margin:6px 0 0; color:var(--muted); font-size:14px}
+    form{padding:26px 28px 24px}
+    label{display:block; font-weight:600; font-size:12px; letter-spacing:.02em; margin:14px 0 6px}
+    .input{
+      width:100%; padding:14px 14px; border:1px solid #e6e6e9; border-radius:12px;
+      outline:none; transition:.2s border, .2s box-shadow; background:#fff;
+    }
+    .input:focus{
+      border-color:var(--primary);
+      box-shadow:0 0 0 3px rgba(255,56,92,.18);
+    }
+    .actions{display:flex; align-items:center; gap:12px; margin-top:16px}
+    .btn{
+      appearance:none; border:0; cursor:pointer; font-weight:700;
+      padding:14px 18px; border-radius:12px; transition:transform .05s ease, box-shadow .2s ease;
+    }
+    .btn--primary{
+      background:linear-gradient(135deg, var(--primary), #ff6b81); color:#fff; flex:1;
+      box-shadow:0 8px 20px rgba(255,56,92,.25);
+    }
+    .btn--primary:active{ transform:translateY(1px) }
+    .divider{height:1px; background:#f0f1f4; margin:4px 0 16px}
+    .muted{color:var(--muted); font-size:14px}
+    .link{color:var(--secondary); text-decoration:none; font-weight:600}
+    .link:hover{text-decoration:underline}
+    .error{color:#b91c1c; background:#fee2e2; padding:10px 12px; border-radius:10px; margin-top:12px; font-size:14px}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="card__head">
+      <h1 class="title">Reservierungs&shy;verwaltung</h1>
+      <p class="subtitle">Melde dich an, um deine Reservierungen zu verwalten.</p>
+    </div>
+
+    <form onsubmit="return loginUser(event)">
+      <label for="username">E-Mail</label>
+      <input id="username" class="input" type="email" placeholder="z. B. max@beispiel.de" required />
+
+      <label for="password">Passwort</label>
+      <input id="password" class="input" type="password" placeholder="••••••••" required />
+
+      <div id="error" class="error" style="display:none"></div>
+
+      <div class="actions">
+        <button type="submit" class="btn btn--primary">Anmelden</button>
+      </div>
+
+      <div class="divider"></div>
+      <p class="muted">
+        Noch kein Konto?
+        <a class="link" href="register.html">Jetzt registrieren</a>
+      </p>
+    </form>
+  </div>
+
+  <!-- Your JS (with cache buster so the latest code loads) -->
+  <script>
+    // little helper so your existing renderer.js can show the error nicely
+    const errBox = document.getElementById('error');
+    if (errBox) {
+      const orig = console.error;
+      console.error = function(...args){
+        try{
+          if (errBox && args[0] && typeof args[0]==='string') {
+            errBox.style.display='block';
+            errBox.textContent = args[0];
+          }
+        }catch(_){} finally { orig.apply(console, args); }
+      }
+    }
+  </script>
+  <script src="renderer.js?v=100"></script>
+</body>
+</html>

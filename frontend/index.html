@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reservierungsverwaltung</title>
+
+    <!-- Icons & Fonts -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  </head>
+
+  <!-- protected = Auth-Check in renderer.js -->
+  <body class="protected">
+    <div class="container">
+      <header>
+        <h1>Reservierungsverwaltung</h1>
+        <button id="logout-btn" class="btn btn-primary">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+      </header>
+
+      <div class="tab-container">
+        <div class="tab-nav">
+          <button class="tab-btn active" onclick="openTab('add-tab', event)">
+            <i class="fas fa-plus-circle"></i> Hinzufügen
+          </button>
+          <button class="tab-btn" onclick="openTab('list-tab', event)">
+            <i class="fas fa-list"></i> Liste
+          </button>
+          <button class="tab-btn" onclick="openTab('stats-tab', event)">
+            <i class="fas fa-chart-bar"></i> Statistik
+          </button>
+          <button class="tab-btn" onclick="openTab('export-tab', event)">
+            <i class="fas fa-file-export"></i> Exportieren
+          </button>
+        </div>
+
+        <!-- Tab: Hinzufügen -->
+        <div id="add-tab" class="tab-content active">
+          <form id="reservation-form">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="prenom"><i class="fas fa-user"></i> Vorname:</label>
+                <input type="text" id="prenom" required />
+              </div>
+              <div class="form-group">
+                <label for="nom"
+                  ><i class="fas fa-user-tag"></i> Nachname:</label
+                >
+                <input type="text" id="nom" required />
+              </div>
+              <div class="form-group">
+                <label for="cin"
+                  ><i class="fas fa-id-card"></i> Ausweisnummer:</label
+                >
+                <input type="text" id="cin" required />
+              </div>
+              <div class="form-group">
+                <label for="telephone"
+                  ><i class="fas fa-phone"></i> Telefonnummer:</label
+                >
+                <input type="tel" id="telephone" required />
+              </div>
+              <div class="form-group">
+                <label for="date-debut"
+                  ><i class="fas fa-calendar-day"></i> Startdatum:</label
+                >
+                <input type="date" id="date-debut" required />
+              </div>
+              <div class="form-group">
+                <label for="date-fin"
+                  ><i class="fas fa-calendar-week"></i> Enddatum:</label
+                >
+                <input type="date" id="date-fin" required />
+              </div>
+              <div class="form-group">
+                <label for="prix"
+                  ><i class="fas fa-money-bill-wave"></i> Preis (€):</label
+                >
+                <input type="number" id="prix" required />
+              </div>
+              <div class="form-group">
+                <label for="logement"
+                  ><i class="fas fa-home"></i> Unterkunft:</label
+                >
+                <input type="text" id="logement" required />
+              </div>
+              <div class="form-group">
+                <label for="emplacement"
+                  ><i class="fas fa-map-marker-alt"></i> Standort:</label
+                >
+                <input type="text" id="emplacement" required />
+              </div>
+              <div class="form-group full-width">
+                <label for="photo-cin"
+                  ><i class="fas fa-camera"></i> Ausweisfoto:</label
+                >
+                <input type="file" id="photo-cin" accept="image/*" />
+              </div>
+              <div class="form-group full-width">
+                <label for="photo-passeport"
+                  ><i class="fas fa-camera"></i> Reisepassfoto:</label
+                >
+                <input type="file" id="photo-passeport" accept="image/*" />
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-save"></i> Speichern
+            </button>
+          </form>
+
+          <!-- Excel Import -->
+          <div class="card" style="margin-top: 16px">
+            <h3><i class="fas fa-file-excel"></i> Import aus Excel</h3>
+
+            <!-- echtes Input versteckt -->
+            <input
+              type="file"
+              id="excel-file"
+              accept=".xlsx,.xls,.csv"
+              style="position: absolute; left: -9999px; width: 1px; height: 1px"
+            />
+
+            <div class="row actions">
+              <button type="button" id="excel-browse" class="btn">
+                <i class="fas fa-folder-open"></i> Datei auswählen
+              </button>
+              <button
+                type="button"
+                id="excel-import-all"
+                class="btn btn-primary"
+                disabled
+              >
+                <i class="fas fa-file-import"></i> Alle Zeilen importieren
+              </button>
+              <span id="excel-file-name" class="muted"
+                >Keine Datei ausgewählt</span
+              >
+            </div>
+
+            <p class="muted" style="margin-top: 6px">
+              Hinweis: Nach dem Laden füllt die erste Zeile das Formular. Mit
+              „Alle Zeilen importieren“ werden sämtliche Zeilen direkt
+              gespeichert.
+            </p>
+          </div>
+        </div>
+
+        <!-- Tab: Liste -->
+        <div id="list-tab" class="tab-content">
+          <div class="table-container">
+            <table id="reservation-table">
+              <thead>
+                <tr>
+                  <th>Vorname</th>
+                  <th>Nachname</th>
+                  <th>Zeitraum</th>
+                  <th>Dauer</th>
+                  <th>Preis</th>
+                  <th>Ausweisfoto</th>
+                  <th>Reisepassfoto</th>
+                  <th>Unterkunft</th>
+                  <th>Standort</th>
+                  <th>Aktionen</th>
+                </tr>
+              </thead>
+              <tbody id="reservation-list"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Tab: Statistik -->
+        <div id="stats-tab" class="tab-content">
+          <div class="stats-grid">
+            <div class="stat-card">
+              <h3>Diesen Monat</h3>
+              <p id="total-mensuel">0 €</p>
+            </div>
+            <div class="stat-card">
+              <h3>Dieses Jahr</h3>
+              <p id="total-annuel">0 €</p>
+            </div>
+            <div class="stat-card">
+              <h3>Unterkünfte</h3>
+              <p id="total-logements">0</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab: Export -->
+        <div id="export-tab" class="tab-content">
+          <h3><i class="fas fa-file-pdf"></i> PDF-Export</h3>
+
+          <label for="select-year">Jahr:</label>
+          <select id="select-year"></select>
+
+          <label for="select-month" style="margin-left: 8px">Monat:</label>
+          <select id="select-month">
+            <option value="0">Januar</option>
+            <option value="1">Februar</option>
+            <option value="2">März</option>
+            <option value="3">April</option>
+            <option value="4">Mai</option>
+            <option value="5">Juni</option>
+            <option value="6">Juli</option>
+            <option value="7">August</option>
+            <option value="8">September</option>
+            <option value="9">Oktober</option>
+            <option value="10">November</option>
+            <option value="11">Dezember</option>
+          </select>
+
+          <label for="select-logement" style="margin-left: 8px"
+            >Unterkunft:</label
+          >
+          <select id="select-logement">
+            <option value="alle">Alle</option>
+          </select>
+
+          <div style="margin-top: 12px">
+            <button id="export-pdf-mois" class="btn">
+              <i class="fas fa-download"></i> Monat exportieren
+            </button>
+            <button id="export-pdf-annee" class="btn">
+              <i class="fas fa-download"></i> Jahr exportieren
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- App-Logik -->
+    <script src="renderer.js?v=99"></script>
+
+
+    <script>
+      function openTab(tabId, event) {
+        document
+          .querySelectorAll(".tab-content")
+          .forEach((tab) => tab.classList.remove("active"));
+        document
+          .querySelectorAll(".tab-btn")
+          .forEach((btn) => btn.classList.remove("active"));
+        document.getElementById(tabId).classList.add("active");
+        if (event && event.currentTarget)
+          event.currentTarget.classList.add("active");
+      }
+      
+    </script>
+  </body>
+</html>
